@@ -93,6 +93,8 @@ int main()
     // TODO 8 Теперь скомпилируйте программу и напечатайте в консоль лог компиляции
     // см. clBuildProgram
 
+    // А так же напечатайте лог компиляции (он будет очень полезен, если в кернеле есть синтаксические ошибки - т.е. когда clBuildProgram вернет CL_BUILD_PROGRAM_FAILURE)
+    // см. clGetProgramBuildInfo
 //    size_t log_size = 0;
 //    std::vector<char> log(log_size, 0);
 //    if (log_size > 1) {
