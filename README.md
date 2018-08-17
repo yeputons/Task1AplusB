@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.com/GPGPUCourse2018/Example1aplusb.svg?branch=master)](https://travis-ci.com/GPGPUCourse2018/Example1aplusb)
+[![Build Status](https://travis-ci.com/GPGPUCourse2018/Example1AplusB.svg?branch=master)](https://travis-ci.com/GPGPUCourse2018/Example1AplusB)
