@@ -116,7 +116,7 @@ public:
         if (laps.size() > 0) {
             sum2 /= laps.size();
         }
-        return sqrt(sum2 - avg * avg);
+        return sqrt(std::max(0.0, sum2 - avg * avg));
     }
 
 protected:
