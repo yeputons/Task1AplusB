@@ -1,0 +1,10 @@
+build/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+*.exe
+
+cmake_install.cmake
+compile_commands.json
+libs/
+nbproject/
