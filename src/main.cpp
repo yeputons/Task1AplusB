@@ -10,17 +10,14 @@
 #include <fstream>
 #include <cassert>
 
-
 template <typename T>
-std::string to_string(T value)
-{
+std::string to_string(T value) {
     std::ostringstream ss;
     ss << value;
     return ss.str();
 }
 
-void reportError(cl_int err, const std::string &filename, int line)
-{
+void reportError(cl_int err, const std::string &filename, int line) {
     if (CL_SUCCESS == err)
         return;
 
@@ -33,9 +30,7 @@ void reportError(cl_int err, const std::string &filename, int line)
 
 #define OCL_SAFE_CALL(expr) reportError(expr, __FILE__, __LINE__)
 
-
-int main()
-{    
+int main() {
     // Пытаемся слинковаться с символами OpenCL API в runtime (через библиотеку clew)
     if (!ocl_init())
         throw std::runtime_error("Can't init OpenCL driver!");
@@ -54,7 +49,7 @@ int main()
     // Убедитесь что в соответствии с документацией вы создали in-order очередь задач
     // И хорошо бы сразу добавить в конце clReleaseQueue
 
-    unsigned int n = 1000*1000;
+    unsigned int n = 1000 * 1000;
     // Создаем два массива псевдослучайных данных для сложения и массив для будущего хранения результата
     std::vector<float> as(n, 0);
     std::vector<float> bs(n, 0);
@@ -89,18 +84,18 @@ int main()
     // TODO 7 Создайте OpenCL-подпрограмму с исходниками кернела
     // см. Runtime APIs -> Program Objects -> clCreateProgramWithSource
     // у string есть метод c_str(), но обратите внимание что передать вам нужно указатель на указатель
-    
+
     // TODO 8 Теперь скомпилируйте программу и напечатайте в консоль лог компиляции
     // см. clBuildProgram
 
     // А так же напечатайте лог компиляции (он будет очень полезен, если в кернеле есть синтаксические ошибки - т.е. когда clBuildProgram вернет CL_BUILD_PROGRAM_FAILURE)
     // см. clGetProgramBuildInfo
-//    size_t log_size = 0;
-//    std::vector<char> log(log_size, 0);
-//    if (log_size > 1) {
-//        std::cout << "Log:" << std::endl;
-//        std::cout << log.data() << std::endl;
-//    }
+    //    size_t log_size = 0;
+    //    std::vector<char> log(log_size, 0);
+    //    if (log_size > 1) {
+    //        std::cout << "Log:" << std::endl;
+    //        std::cout << log.data() << std::endl;
+    //    }
 
     // TODO 9 Создайте OpenCL-kernel в созданной подпрограмме (в одной подпрограмме может быть несколько кернелов, но в данном случае кернел один)
     // см. подходящую функцию в Runtime APIs -> Program Objects -> Kernel Objects
@@ -115,7 +110,7 @@ int main()
     }
 
     // TODO 11 Выше увеличьте n с 1000*1000 до 100*1000*1000 (чтобы дальнейшие замеры были ближе к реальности)
-    
+
     // TODO 12 Запустите выполнения кернела:
     // - С одномерной рабочей группой размера 128
     // - В одномерном рабочем пространстве размера roundedUpN, где roundedUpN - наименьшее число кратное 128 и при этом не меньшее n
@@ -136,7 +131,7 @@ int main()
         // подробнее об этом - см. timer.lapsFiltered
         // P.S. чтобы в CLion быстро перейти к символу (функции/классу/много чему еще) достаточно нажать Ctrl+Shift+Alt+N -> lapsFiltered -> Enter
         std::cout << "Kernel average time: " << t.lapAvg() << "+-" << t.lapStd() << " s" << std::endl;
-        
+
         // TODO 13 Рассчитайте достигнутые гигафлопcы:
         // - Всего элементов в массивах по n штук
         // - Всего выполняется операций: операция a+b выполняется n раз
@@ -166,11 +161,11 @@ int main()
     }
 
     // TODO 16 Сверьте результаты вычислений со сложением чисел на процессоре (и убедитесь, что если в кернеле сделать намеренную ошибку, то эта проверка поймает ошибку)
-//    for (unsigned int i = 0; i < n; ++i) {
-//        if (cs[i] != as[i] + bs[i]) {
-//            throw std::runtime_error("CPU and GPU results differ!");
-//        }
-//    }
+    //    for (unsigned int i = 0; i < n; ++i) {
+    //        if (cs[i] != as[i] + bs[i]) {
+    //            throw std::runtime_error("CPU and GPU results differ!");
+    //        }
+    //    }
 
     return 0;
 }
