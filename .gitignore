@@ -8,3 +8,14 @@ cmake_install.cmake
 compile_commands.json
 libs/
 nbproject/
+
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.opensdf
+*.sdf
+Debug/
+/enumDevices.*/
+/x64/
+/.vs
